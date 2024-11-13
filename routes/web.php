@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BehindTheLenseController;
+use App\Http\Controllers\PhotographyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,5 +19,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('behind-the-lense', BehindTheLenseController::class);
+Route::resource('admin-behind-the-lense', BehindTheLenseController::class)
+     ->names([
+         'adminbtlindex'   => 'admin-behind-the-lense.index',
+         'adminbtlcreate'  => 'admin-behind-the-lense.create',
+         'adminbtlstore'   => 'admin-behind-the-lense.store',
+         'adminbtlshow'    => 'admin-behind-the-lense.show',
+         'adminbtledit'    => 'admin-behind-the-lense.edit',
+         'adminbtlupdate'  => 'admin-behind-the-lense.update',
+         'adminbtldestroy' => 'admin-behind-the-lense.destroy',
+     ]);
+
+     Route::resource('admin-photography', PhotographyController::class)
+     ->names([
+         'adminphotographyindex'   => 'admin-photography.index',
+         'adminphotographycreate'  => 'admin-photography.create',
+         'adminphotographystore'   => 'admin-photography.store',
+         'adminphotographyshow'    => 'admin-photography.show',
+         'adminphotographyedit'    => 'admin-photography.edit',
+         'adminphotographyupdate'  => 'admin-photography.update',
+         'adminphotographydestroy' => 'admin-photography.destroy',
+     ]);
+
 require __DIR__.'/auth.php';

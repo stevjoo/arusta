@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Add New Photo</h1>
-    <form method="POST" action="{{ route('admin-behind-the-lense.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin-photography.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>

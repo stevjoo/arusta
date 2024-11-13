@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Photo</h1>
-    <form method="POST" action="{{ route('admin-behind-the-lense.update', ['admin_behind_the_lense' => $photo->id]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin-photography.update', ['admin_photography' => $photo->id]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">

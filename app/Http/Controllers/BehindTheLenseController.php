@@ -37,57 +37,50 @@ class BehindTheLenseController extends Controller
 
         $photo->save();
 
-        return redirect()->route('behind-the-lense.index')->with('success', 'Photo added successfully!');
+        return redirect()->route('admin-behind-the-lense.index')->with('success', 'Photo added successfully!');
     }
 
-    public function show(BehindTheLense $photo)
+    public function show(BehindTheLense $admin_behind_the_lense)
     {
-        return view('behindTheLense.show', compact('photo'));
+        return view('behindTheLense.show', compact('admin_behind_the_lense'));
     }
 
-    public function edit(BehindTheLense $behind_the_lense)
-{
-    return view('behindTheLense.edit', ['photo' => $behind_the_lense]);
-}
+    public function edit(BehindTheLense $admin_behind_the_lense)
+    {
+        return view('behindTheLense.edit', ['photo' => $admin_behind_the_lense]);
+    }
 
-public function update(Request $request, BehindTheLense $behind_the_lense)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'image' => 'image',
-    ]);
+    public function update(Request $request, BehindTheLense $admin_behind_the_lense)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'image',
+        ]);
 
-    $behind_the_lense->title = $request->title;
+        $admin_behind_the_lense->title = $request->title;
 
-    if ($request->hasFile('image')) {
-        if ($behind_the_lense->image_path && Storage::disk('public')->exists($behind_the_lense->image_path)) {
-            Storage::disk('public')->delete($behind_the_lense->image_path);
+        if ($request->hasFile('image')) {
+            if ($admin_behind_the_lense->image_path && Storage::disk('public')->exists($admin_behind_the_lense->image_path)) {
+                Storage::disk('public')->delete($admin_behind_the_lense->image_path);
+            }
+
+            $imagePath = $request->file('image')->store('BehindTheLense', 'public');
+            $admin_behind_the_lense->image_path = $imagePath;
         }
 
-        $imagePath = $request->file('image')->store('BehindTheLense', 'public');
-        $behind_the_lense->image_path = $imagePath;
+        $admin_behind_the_lense->save();
+
+        return redirect()->route('admin-behind-the-lense.index')->with('success', 'Photo updated successfully!');
     }
 
-    $behind_the_lense->save();
+    public function destroy(BehindTheLense $admin_behind_the_lense)
+    {
+        if (!empty($admin_behind_the_lense->image_path) && Storage::disk('public')->exists($admin_behind_the_lense->image_path)) {
+            Storage::disk('public')->delete($admin_behind_the_lense->image_path);
+        }
 
-    return redirect()->route('behind-the-lense.index')->with('success', 'Photo updated successfully!');
-}
+        $admin_behind_the_lense->delete();
 
-
-    public function destroy(BehindTheLense $photo)
-{
-    // Check if image path exists and if file exists in the storage
-    if (!empty($photo->image_path) && Storage::disk('public')->exists($photo->image_path)) {
-        // Attempt to delete the image file
-        Storage::disk('public')->delete($photo->image_path);
+        return back()->with('success', 'Photo and associated image file deleted successfully!');
     }
-
-    // Delete the photo record from the database
-    $photo->delete();
-
-    // Redirect back with a success message
-    return back()->with('success', 'Photo and associated image file deleted successfully!');
-}
-
-
 }

@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>Behind The Lens</h1>
-    <a href="{{ route('admin-behind-the-lense.create') }}" class="btn btn-primary">Add New Photo</a>
+    <h1>Photography</h1>
+    <a href="{{ route('admin-photography.create') }}" class="btn btn-primary">Add New Photo</a>
     <div class="mt-3">
         <table class="table">
             <thead>
@@ -21,9 +21,9 @@
                         <td>{{ $photo->title }}</td>
                         <td><img src="{{ Storage::url($photo->image_path) }}" alt="Photo" width="100"></td>
                         <td>
-                            <a href="{{ route('admin-behind-the-lense.show', $photo->id) }}" class="btn btn-success">View</a>
-                            <a href="{{ route('admin-behind-the-lense.edit', $photo->id) }}" class="btn btn-info">Edit</a>
-                            <form action="{{ route('admin-behind-the-lense.destroy', $photo->id) }}" method="POST" style="display: inline-block;">
+                            <a href="{{ route('admin-photography.show', $photo->id) }}" class="btn btn-success">View</a>
+                            <a href="{{ route('admin-photography.edit', $photo->id) }}" class="btn btn-info">Edit</a>
+                            <form action="{{ route('admin-photography.destroy', $photo->id) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this photo?')">Delete</button>
