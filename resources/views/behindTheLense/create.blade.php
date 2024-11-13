@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Upload New Photo</h1>
+    <h1>Add New Photo</h1>
     <form method="POST" action="{{ route('behind-the-lense.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -10,10 +10,10 @@
             <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
+            <label for="image" class="form-label">Upload Image</label>
             <input type="file" class="form-control" id="image" name="image" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Add Photo</button>
     </form>
 </div>
 @endsection

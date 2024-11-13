@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/BehindTheLenseController.php
-
 namespace App\Http\Controllers;
 
 use App\Models\BehindTheLense;
@@ -22,41 +20,41 @@ class BehindTheLenseController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'image' => 'required|image',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'required|image',
+        ]);
 
-    $photo = new BehindTheLense();
-    $photo->title = $request->title;
+        $photo = new BehindTheLense();
+        $photo->title = $request->title;
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images', 'public');
-        $photo->image_path = $imagePath;
+        if ($request->hasFile('image')) {
+            // Store in the public disk under 'BehindTheLense' folder
+            $imagePath = $request->file('image')->store('BehindTheLense', 'public');
+            $photo->image_path = $imagePath;
+        }
+
+        $photo->save();
+
+        return redirect()->route('behind-the-lense.index')->with('success', 'Photo added successfully!');
     }
-
-    $photo->save();
-
-    return redirect()->route('behind-the-lense.index');
-}
-
 
     public function show(BehindTheLense $photo)
     {
         return view('behindTheLense.show', compact('photo'));
     }
 
-    public function edit(BehindTheLense $photo)
-    {
-        return view('behindTheLense.edit', compact('photo'));
-    }
+    public function edit(BehindTheLense $behind_the_lense)
+{
+    return view('behindTheLense.edit', ['photo' => $behind_the_lense]);
+}
 
-    public function update(Request $request, BehindTheLense $behind_the_lense)
+public function update(Request $request, BehindTheLense $behind_the_lense)
 {
     $request->validate([
         'title' => 'required|string|max:255',
-        'image' => 'image',  // Notice 'image' is not required here
+        'image' => 'image',
     ]);
 
     $behind_the_lense->title = $request->title;
@@ -66,22 +64,30 @@ class BehindTheLenseController extends Controller
             Storage::disk('public')->delete($behind_the_lense->image_path);
         }
 
-        $imagePath = $request->file('image')->store('images', 'public');
+        $imagePath = $request->file('image')->store('BehindTheLense', 'public');
         $behind_the_lense->image_path = $imagePath;
     }
 
     $behind_the_lense->save();
 
-    return redirect()->route('behind-the-lense.index');
+    return redirect()->route('behind-the-lense.index')->with('success', 'Photo updated successfully!');
 }
 
 
-
     public function destroy(BehindTheLense $photo)
-    {
-        Storage::delete($photo->image_path);
-        $photo->delete();
-
-        return back();
+{
+    // Check if image path exists and if file exists in the storage
+    if (!empty($photo->image_path) && Storage::disk('public')->exists($photo->image_path)) {
+        // Attempt to delete the image file
+        Storage::disk('public')->delete($photo->image_path);
     }
+
+    // Delete the photo record from the database
+    $photo->delete();
+
+    // Redirect back with a success message
+    return back()->with('success', 'Photo and associated image file deleted successfully!');
+}
+
+
 }

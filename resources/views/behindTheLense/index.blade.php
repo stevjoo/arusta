@@ -21,11 +21,12 @@
                         <td>{{ $photo->title }}</td>
                         <td><img src="{{ Storage::url($photo->image_path) }}" alt="Photo" width="100"></td>
                         <td>
+                            <a href="{{ route('behind-the-lense.show', $photo->id) }}" class="btn btn-success">View</a>
                             <a href="{{ route('behind-the-lense.edit', $photo->id) }}" class="btn btn-info">Edit</a>
                             <form action="{{ route('behind-the-lense.destroy', $photo->id) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this photo?')">Delete</button>
                             </form>
                         </td>
                     </tr>

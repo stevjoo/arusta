@@ -13,7 +13,7 @@
         <div class="mb-3">
             <label for="image" class="form-label">Change Image</label>
             <input type="file" class="form-control" id="image" name="image">
-            <img src="{{ Storage::url($photo->image_path) }}" alt="Current Photo" width="100">
+            <img src="{{ Storage::url($photo->image_path) }}" alt="Current Photo" width="100" class="mt-2">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
