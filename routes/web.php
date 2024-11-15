@@ -4,6 +4,8 @@ use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BehindTheLenseController;
 use App\Http\Controllers\PhotographyController;
+use App\Http\Controllers\GraphicDesignController;
+use App\Models\GraphicDesign;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,9 +16,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::get('/contact',[ContactFormController::class, 'form_view']);
 Route::post('/post-message',[ContactFormController::class,'post_message']);
-
 
 
 Route::middleware('auth')->group(function () {
@@ -24,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 Route::resource('admin-behind-the-lense', BehindTheLenseController::class)
     ->names([
@@ -36,6 +39,7 @@ Route::resource('admin-behind-the-lense', BehindTheLenseController::class)
         'adminbtldestroy' => 'admin-behind-the-lense.destroy',
     ]);
 
+
 Route::resource('admin-photography', PhotographyController::class)
     ->names([
         'adminphotographyindex' => 'admin-photography.index',
@@ -47,4 +51,16 @@ Route::resource('admin-photography', PhotographyController::class)
         'adminphotographydestroy' => 'admin-photography.destroy',
     ]);
 
-require __DIR__ . '/auth.php';
+
+Route::resource('admin-graphic-design', GraphicDesignController::class)
+    ->names([
+        'admingraphicdesignindex' => 'admin-graphic-design.index',
+        'admingraphicdesigncreate' => 'admin-graphic-design.create',
+        'admingraphicdesignstore' => 'admin-graphic-design.store',
+        'admingraphicdesignshow' => 'admin-graphic-design.show',
+        'admingraphicdesignedit' => 'admin-graphic-design.edit',
+        'admingraphicdesignupdate' => 'admin-graphic-design.update',
+        'admingraphicdesigndestroy' => 'admin-graphic-design.destroy',
+    ]);
+
+require __DIR__ . '/auth.php';  

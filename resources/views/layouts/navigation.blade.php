@@ -21,8 +21,8 @@
                     <x-nav-link :href="route('admin-photography.index')" :active="request()->routeIs('admin-photography.index')">
                         {{ __('Photography') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('admin-graphic-design.index')" :active="request()->routeIs('admin-graphic-design.index')">
+                        {{ __('Graphic Design') }}
                     </x-nav-link>
                 </div>
             </div>
