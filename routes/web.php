@@ -5,7 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BehindTheLenseController;
 use App\Http\Controllers\PhotographyController;
 use App\Http\Controllers\GraphicDesignController;
+use App\Http\Controllers\VideoReelsController;
 use App\Models\GraphicDesign;
+use App\Models\VideoReels;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,4 +65,16 @@ Route::resource('admin-graphic-design', GraphicDesignController::class)
         'admingraphicdesigndestroy' => 'admin-graphic-design.destroy',
     ]);
 
-require __DIR__ . '/auth.php';  
+
+Route::resource('admin-video-reels', VideoReelsController::class)
+    ->names([
+        'adminvideoreelsindex' => 'admin-video-reels.index',
+        'adminvideoreelscreate' => 'admin-video-reels.create',
+        'adminvideoreelsstore' => 'admin-video-reels.store',
+        'adminvideoreelsshow' => 'admin-video-reels.show',
+        'adminvideoreelsedit' => 'admin-video-reels.edit',
+        'adminvideoreelsupdate' => 'admin-video-reels.update',
+        'adminvideoreelsdestroy' => 'admin-video-reels.destroy',
+    ]);
+
+require __DIR__ . '/auth.php';
