@@ -29,17 +29,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::resource('admin-behind-the-lense', BehindTheLenseController::class)
     ->names([
-        'adminbtlindex' => 'admin-behind-the-lense.index',
-        'adminbtlcreate' => 'admin-behind-the-lense.create',
-        'adminbtlstore' => 'admin-behind-the-lense.store',
-        'adminbtlshow' => 'admin-behind-the-lense.show',
-        'adminbtledit' => 'admin-behind-the-lense.edit',
-        'adminbtlupdate' => 'admin-behind-the-lense.update',
-        'adminbtldestroy' => 'admin-behind-the-lense.destroy',
-    ]);
+        'index' => 'admin-behind-the-lense.index',
+        'create' => 'admin-behind-the-lense.create',
+        'store' => 'admin-behind-the-lense.store',
+        'show' => 'admin-behind-the-lense.show',
+        'edit' => 'admin-behind-the-lense.edit',
+        'update' => 'admin-behind-the-lense.update',
+        'destroy' => 'admin-behind-the-lense.destroy',
+    ])->middleware(['auth', 'verified']);
 
 
 Route::resource('admin-photography', PhotographyController::class)
@@ -51,7 +50,7 @@ Route::resource('admin-photography', PhotographyController::class)
         'adminphotographyedit' => 'admin-photography.edit',
         'adminphotographyupdate' => 'admin-photography.update',
         'adminphotographydestroy' => 'admin-photography.destroy',
-    ]);
+    ])->middleware(['auth', 'verified']);
 
 
 Route::resource('admin-graphic-design', GraphicDesignController::class)
@@ -63,7 +62,7 @@ Route::resource('admin-graphic-design', GraphicDesignController::class)
         'admingraphicdesignedit' => 'admin-graphic-design.edit',
         'admingraphicdesignupdate' => 'admin-graphic-design.update',
         'admingraphicdesigndestroy' => 'admin-graphic-design.destroy',
-    ]);
+    ])->middleware(['auth', 'verified']);
 
 
 Route::resource('admin-video-reels', VideoReelsController::class)
@@ -75,6 +74,7 @@ Route::resource('admin-video-reels', VideoReelsController::class)
         'adminvideoreelsedit' => 'admin-video-reels.edit',
         'adminvideoreelsupdate' => 'admin-video-reels.update',
         'adminvideoreelsdestroy' => 'admin-video-reels.destroy',
-    ]);
+    ])->middleware(['auth', 'verified']);
+    
 
 require __DIR__ . '/auth.php';
