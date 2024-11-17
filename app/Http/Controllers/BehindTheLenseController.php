@@ -14,6 +14,12 @@ class BehindTheLenseController extends Controller
         return view('behindTheLense.index', compact('photos'));
     }
 
+    public function publicIndex()
+    {
+        $photos = BehindTheLense::all();
+        return view('usersview.behind-the-lense', compact('photos'));
+    }
+
     public function create()
     {
         return view('behindTheLense.create');

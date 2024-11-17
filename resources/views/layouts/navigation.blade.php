@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('admin-graphic-design.index')" :active="request()->routeIs('admin-graphic-design.index')">
                         {{ __('Graphic Design') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin-video-reels.index')" :active="request()->routeIs('admin-video-reels.index')">
+                        {{ __('Video Reels') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -78,6 +81,18 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-behind-the-lense.index')" :active="request()->routeIs('admin-behind-the-lense.index')">
+                {{ __('Behind the Lense') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-photography.index')" :active="request()->routeIs('admin-photography.index')">
+                {{ __('Photography') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-graphic-design.index')" :active="request()->routeIs('admin-graphic-design.index')">
+                {{ __('Graphic Design') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-video-reels.index')" :active="request()->routeIs('admin-video-reels.index')">
+                {{ __('Video Reels') }}
             </x-responsive-nav-link>
         </div>
 

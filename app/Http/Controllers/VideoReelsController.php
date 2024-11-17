@@ -14,6 +14,12 @@ class VideoReelsController extends Controller
         return view('videoReels.index', compact('videos'));
     }
 
+    public function publicIndex()
+    {
+        $photos = VideoReels::all();
+        return view('usersview.video-reels', compact('photos'));
+    }
+
     public function create()
     {
         return view('videoReels.create');

@@ -14,6 +14,12 @@ class PhotographyController extends Controller
         return view('photography.index', compact('photos'));
     }
 
+    public function publicIndex()
+    {
+        $photos = Photography::all();
+        return view('usersview.photography', compact('photos'));
+    }
+
     public function create()
     {
         return view('photography.create');

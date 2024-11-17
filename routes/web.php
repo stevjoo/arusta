@@ -7,21 +7,33 @@ use App\Http\Controllers\PhotographyController;
 use App\Http\Controllers\GraphicDesignController;
 use App\Http\Controllers\VideoReelsController;
 use App\Models\GraphicDesign;
+use App\Models\Photography;
 use App\Models\VideoReels;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function(){
+    return view('usersview/main');
+})->name('landing-page');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/behind-the-lense', [BehindTheLenseController::class, 'publicIndex'])->name('behind-the-lense.index');
+Route::get('/photography', [PhotographyController::class, 'publicIndex'])->name('photography.index');
+Route::get('/graphic-design', [GraphicDesignController::class, 'publicIndex'])->name('graphic-design.index');
+Route::get('/video-reels', [VideoReelsController::class, 'publicIndex'])->name('video-reels.index');
 
+Route::get('/portfolio', function(){
+    return view('usersview/portfolio');
+})->name('portfolio');
 
-Route::get('/contact',[ContactFormController::class, 'form_view']);
+Route::get('/schedule', function(){
+    return view('usersview/schedule');
+})->name('schedule');
+
+Route::get('/contact',[ContactFormController::class, 'form_view'])->name('contactus');
 Route::post('/post-message',[ContactFormController::class,'post_message']);
 
+Route::get('/admin-dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

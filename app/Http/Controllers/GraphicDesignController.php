@@ -14,6 +14,12 @@ class GraphicDesignController extends Controller
         return view('graphicDesign.index', compact('photos'));
     }
 
+    public function publicIndex()
+    {
+        $photos = GraphicDesign::all();
+        return view('usersview.graphic-design', compact('photos'));
+    }
+
     public function create()
     {
         return view('graphicDesign.create');
